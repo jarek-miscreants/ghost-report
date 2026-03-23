@@ -1,0 +1,420 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout>
+  <!-- Navigation -->
+  <header class="gs-nav">
+    <div class="gs-nav__inner">
+      <a href="/" class="gs-nav__pill">
+        <span style="font-weight:700;font-size:14px;letter-spacing:-0.02em">ghost</span>
+      </a>
+      <nav class="gs-nav__links">
+        <a href="#findings" class="gs-nav__link">[F] Findings</a>
+        <a href="#leaderboard" class="gs-nav__link">[L] Leaderboard</a>
+        <a href="#methodology" class="gs-nav__link">[M] Methodology</a>
+        <a href="#dataset" class="gs-nav__link">[D] Dataset</a>
+      </nav>
+      <a href="/" class="gs-nav__link gs-nav__login">[H] Home</a>
+      <button class="gs-nav__hamburger" id="gs-nav-toggle" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div class="gs-nav__mobile" id="gs-nav-mobile">
+      <a href="#findings" class="gs-nav__link">[F] Findings</a>
+      <a href="#leaderboard" class="gs-nav__link">[L] Leaderboard</a>
+      <a href="#methodology" class="gs-nav__link">[M] Methodology</a>
+      <a href="#dataset" class="gs-nav__link">[D] Dataset</a>
+      <a href="/" class="gs-nav__link">[H] Home</a>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="gs-vb-hero">
+    <div class="gs-vb-hero__shader" id="gs-vb-hero-shader"></div>
+    <div class="gs-vb-hero__inner">
+      <div class="gs-vb-hero__content">
+        <div class="gs-vb-hero__eyebrow">
+          <span>RSA Conference 2026</span>
+          <span class="gs-vb-hero__eyebrow-sep">/</span>
+          <span>Ghost Security</span>
+        </div>
+        <h1 class="gs-vb-hero__title">Can LLMs Fix Real-World<br>Security Vulnerabilities?</h1>
+        <p class="gs-vb-hero__desc">
+          We tested 16 frontier language models on the curated VulnBench-200 evaluation subset
+          using best-of-3 runs with description-only file hints. The best model fixes 22.5% of
+          instances. The median: only ~5.5%.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats -->
+  <div class="gs-vb-stats">
+    <div class="gs-vb-stats__inner">
+      <div class="gs-vb-stats__item"><div class="gs-vb-stats__value">16</div><div class="gs-vb-stats__label">Models Tested</div></div>
+      <div class="gs-vb-stats__item"><div class="gs-vb-stats__value">200</div><div class="gs-vb-stats__label">Real CVEs</div></div>
+      <div class="gs-vb-stats__item"><div class="gs-vb-stats__value">55</div><div class="gs-vb-stats__label">CWE Types</div></div>
+      <div class="gs-vb-stats__item"><div class="gs-vb-stats__value">7</div><div class="gs-vb-stats__label">Ecosystems</div></div>
+    </div>
+  </div>
+
+  <!-- Findings -->
+  <section class="gs-vb-findings" id="findings">
+    <div class="gs-vb-findings__inner">
+      <div class="gs-section-eyebrow">Key Findings</div>
+      <h2 class="gs-section-title">What We Learned</h2>
+      <p class="gs-section-desc">
+        With description-only file hints and best-of-3 variance reduction, even the best model
+        patches fewer than 1 in 4 real vulnerabilities. Performance drops sharply outside the top 5.
+      </p>
+      <div class="gs-vb-findings__grid">
+        <div class="gs-vb-finding"><div class="gs-vb-finding__value">22.5%</div><div class="gs-vb-finding__label">Best Model Pass Rate</div><p class="gs-vb-finding__desc">GPT-5.3 Codex leads the benchmark, successfully patching 45 of 200 real vulnerabilities — 4 percentage points ahead of second place.</p></div>
+        <div class="gs-vb-finding"><div class="gs-vb-finding__value">~5.5%</div><div class="gs-vb-finding__label">Median Model Pass Rate</div><p class="gs-vb-finding__desc">The median model fixes roughly 1 in 18 vulnerabilities. Only the top 4 models exceed 15%, and none reach 25%.</p></div>
+        <div class="gs-vb-finding"><div class="gs-vb-finding__value">16.0%</div><div class="gs-vb-finding__label">Best Non-OpenAI Model</div><p class="gs-vb-finding__desc">Claude Opus 4.6 is the highest-scoring non-OpenAI model at 16.0%, followed by Claude Sonnet 4.6 at 10.5%.</p></div>
+        <div class="gs-vb-finding"><div class="gs-vb-finding__value">0.468</div><div class="gs-vb-finding__label">Highest Mean Judge Score</div><p class="gs-vb-finding__desc">GPT-5.3 Codex achieves the highest mean judge score, indicating its patches are closer to the ground-truth fix.</p></div>
+        <div class="gs-vb-finding"><div class="gs-vb-finding__value">3x</div><div class="gs-vb-finding__label">Best-of-3 Variance Reduction</div><p class="gs-vb-finding__desc">Each model is run 3 times per instance, taking the best result. This reduces noise from sampling variance.</p></div>
+        <div class="gs-vb-finding"><div class="gs-vb-finding__value">0%</div><div class="gs-vb-finding__label">Complete Failures</div><p class="gs-vb-finding__desc">StepFun Step 3.5 Flash produced no valid patches across all 3 runs, scoring 0% on every instance.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Leaderboard -->
+  <section class="gs-vb-leaderboard" id="leaderboard">
+    <div class="gs-vb-leaderboard__inner">
+      <div class="gs-vb-leaderboard__header">
+        <div class="gs-section-eyebrow">Results</div>
+        <h2 class="gs-section-title">VulnBench-200 Leaderboard</h2>
+        <p class="gs-section-desc">
+          All models evaluated on the same 200 CVE instances using best-of-3 runs with
+          description-only file hints. Judge: Claude Opus 4.6.
+        </p>
+      </div>
+      <div class="gs-vb-leaderboard__wrap">
+        <table>
+          <thead>
+            <tr>
+              <th style="width:48px">#</th>
+              <th>Model</th>
+              <th>Pass Rate</th>
+              <th>Score</th>
+              <th>Passed</th>
+              <th>Avg Time</th>
+              <th>Cost</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="gs-vb-leaderboard__first-row"><td class="gs-vb-leaderboard__rank gs-vb-leaderboard__rank--first">1</td><td><div class="gs-vb-leaderboard__model gs-vb-leaderboard__model--first">GPT-5.3 Codex</div><div class="gs-vb-leaderboard__org gs-vb-leaderboard__org--openai">OpenAI</div></td><td><div class="gs-vb-leaderboard__bar-wrap"><span class="gs-vb-leaderboard__rate">22.5%</span><div class="gs-vb-leaderboard__bar"><div class="gs-vb-leaderboard__bar-fill gs-vb-leaderboard__bar-fill--first" style="width:100%"></div></div></div></td><td class="gs-vb-leaderboard__meta">0.468</td><td class="gs-vb-leaderboard__meta">45/200</td><td class="gs-vb-leaderboard__meta">43.4s</td><td class="gs-vb-leaderboard__meta">$8.74</td></tr>
+            <tr><td class="gs-vb-leaderboard__rank">2</td><td><div class="gs-vb-leaderboard__model">GPT-5.4</div><div class="gs-vb-leaderboard__org gs-vb-leaderboard__org--openai">OpenAI</div></td><td><div class="gs-vb-leaderboard__bar-wrap"><span class="gs-vb-leaderboard__rate">18.5%</span><div class="gs-vb-leaderboard__bar"><div class="gs-vb-leaderboard__bar-fill" style="width:82.2%"></div></div></div></td><td class="gs-vb-leaderboard__meta">0.407</td><td class="gs-vb-leaderboard__meta">37/200</td><td class="gs-vb-leaderboard__meta">7.3s</td><td class="gs-vb-leaderboard__meta">$4.81</td></tr>
+            <tr><td class="gs-vb-leaderboard__rank">3</td><td><div class="gs-vb-leaderboard__model">Claude Opus 4.6</div><div class="gs-vb-leaderboard__org gs-vb-leaderboard__org--anthropic">Anthropic</div></td><td><div class="gs-vb-leaderboard__bar-wrap"><span class="gs-vb-leaderboard__rate">16.0%</span><div class="gs-vb-leaderboard__bar"><div class="gs-vb-leaderboard__bar-fill" style="width:71.1%"></div></div></div></td><td class="gs-vb-leaderboard__meta">0.404</td><td class="gs-vb-leaderboard__meta">32/200</td><td class="gs-vb-leaderboard__meta">19.6s</td><td class="gs-vb-leaderboard__meta">$10.17</td></tr>
+            <tr><td class="gs-vb-leaderboard__rank">4</td><td><div class="gs-vb-leaderboard__model">GPT-5.2</div><div class="gs-vb-leaderboard__org gs-vb-leaderboard__org--openai">OpenAI</div></td><td><div class="gs-vb-leaderboard__bar-wrap"><span class="gs-vb-leaderboard__rate">15.0%</span><div class="gs-vb-leaderboard__bar"><div class="gs-vb-leaderboard__bar-fill" style="width:66.7%"></div></div></div></td><td class="gs-vb-leaderboard__meta">0.322</td><td class="gs-vb-leaderboard__meta">30/200</td><td class="gs-vb-leaderboard__meta">75.2s</td><td class="gs-vb-leaderboard__meta">$11.30</td></tr>
+            <tr><td class="gs-vb-leaderboard__rank">5</td><td><div class="gs-vb-leaderboard__model">Claude Sonnet 4.6</div><div class="gs-vb-leaderboard__org gs-vb-leaderboard__org--anthropic">Anthropic</div></td><td><div class="gs-vb-leaderboard__bar-wrap"><span class="gs-vb-leaderboard__rate">10.5%</span><div class="gs-vb-leaderboard__bar"><div class="gs-vb-leaderboard__bar-fill" style="width:46.7%"></div></div></div></td><td class="gs-vb-leaderboard__meta">0.322</td><td class="gs-vb-leaderboard__meta">21/200</td><td class="gs-vb-leaderboard__meta">16.0s</td><td class="gs-vb-leaderboard__meta">$6.87</td></tr>
+            <tr><td class="gs-vb-leaderboard__rank">6</td><td><div class="gs-vb-leaderboard__model">Gemini 3 Flash</div><div class="gs-vb-leaderboard__org gs-vb-leaderboard__org--google">Google</div></td><td><div class="gs-vb-leaderboard__bar-wrap"><span class="gs-vb-leaderboard__rate">7.5%</span><div class="gs-vb-leaderboard__bar"><div class="gs-vb-leaderboard__bar-fill" style="width:33.3%"></div></div></div></td><td class="gs-vb-leaderboard__meta">0.318</td><td class="gs-vb-leaderboard__meta">15/200</td><td class="gs-vb-leaderboard__meta">5.1s</td><td class="gs-vb-leaderboard__meta">$3.13</td></tr>
+            <tr><td class="gs-vb-leaderboard__rank">7</td><td><div class="gs-vb-leaderboard__model">GLM-5</div><div class="gs-vb-leaderboard__org gs-vb-leaderboard__org--zhipu">Zhipu AI</div></td><td><div class="gs-vb-leaderboard__bar-wrap"><span class="gs-vb-leaderboard__rate">7.0%</span><div class="gs-vb-leaderboard__bar"><div class="gs-vb-leaderboard__bar-fill" style="width:31.1%"></div></div></div></td><td class="gs-vb-leaderboard__meta">0.249</td><td class="gs-vb-leaderboard__meta">14/200</td><td class="gs-vb-leaderboard__meta">91.9s</td><td class="gs-vb-leaderboard__meta">$4.26</td></tr>
+            <tr><td class="gs-vb-leaderboard__rank">8</td><td><div class="gs-vb-leaderboard__model">Kimi K2.5</div><div class="gs-vb-leaderboard__org gs-vb-leaderboard__org--moonshot">Moonshot AI</div></td><td><div class="gs-vb-leaderboard__bar-wrap"><span class="gs-vb-leaderboard__rate">6.5%</span><div class="gs-vb-leaderboard__bar"><div class="gs-vb-leaderboard__bar-fill" style="width:28.9%"></div></div></div></td><td class="gs-vb-leaderboard__meta">0.228</td><td class="gs-vb-leaderboard__meta">13/200</td><td class="gs-vb-leaderboard__meta">65.7s</td><td class="gs-vb-leaderboard__meta">$3.47</td></tr>
+            <tr><td class="gs-vb-leaderboard__rank">9</td><td><div class="gs-vb-leaderboard__model">Grok 4.1 Fast</div><div class="gs-vb-leaderboard__org gs-vb-leaderboard__org--xai">xAI</div></td><td><div class="gs-vb-leaderboard__bar-wrap"><span class="gs-vb-leaderboard__rate">5.5%</span><div class="gs-vb-leaderboard__bar"><div class="gs-vb-leaderboard__bar-fill" style="width:24.4%"></div></div></div></td><td class="gs-vb-leaderboard__meta">0.273</td><td class="gs-vb-leaderboard__meta">11/200</td><td class="gs-vb-leaderboard__meta">61.1s</td><td class="gs-vb-leaderboard__meta">$3.46</td></tr>
+            <tr><td class="gs-vb-leaderboard__rank">10</td><td><div class="gs-vb-leaderboard__model">GPT-5 Mini</div><div class="gs-vb-leaderboard__org gs-vb-leaderboard__org--openai">OpenAI</div></td><td><div class="gs-vb-leaderboard__bar-wrap"><span class="gs-vb-leaderboard__rate">5.0%</span><div class="gs-vb-leaderboard__bar"><div class="gs-vb-leaderboard__bar-fill" style="width:22.2%"></div></div></div></td><td class="gs-vb-leaderboard__meta">0.275</td><td class="gs-vb-leaderboard__meta">10/200</td><td class="gs-vb-leaderboard__meta">25.4s</td><td class="gs-vb-leaderboard__meta">$3.63</td></tr>
+            <tr><td class="gs-vb-leaderboard__rank">11</td><td><div class="gs-vb-leaderboard__model">DeepSeek V3.2</div><div class="gs-vb-leaderboard__org gs-vb-leaderboard__org--deepseek">DeepSeek</div></td><td><div class="gs-vb-leaderboard__bar-wrap"><span class="gs-vb-leaderboard__rate">4.5%</span><div class="gs-vb-leaderboard__bar"><div class="gs-vb-leaderboard__bar-fill" style="width:20%"></div></div></div></td><td class="gs-vb-leaderboard__meta">0.253</td><td class="gs-vb-leaderboard__meta">9/200</td><td class="gs-vb-leaderboard__meta">78.7s</td><td class="gs-vb-leaderboard__meta">$3.25</td></tr>
+            <tr><td class="gs-vb-leaderboard__rank">12</td><td><div class="gs-vb-leaderboard__model">Claude Haiku 4.5</div><div class="gs-vb-leaderboard__org gs-vb-leaderboard__org--anthropic">Anthropic</div></td><td><div class="gs-vb-leaderboard__bar-wrap"><span class="gs-vb-leaderboard__rate">3.5%</span><div class="gs-vb-leaderboard__bar"><div class="gs-vb-leaderboard__bar-fill" style="width:15.6%"></div></div></div></td><td class="gs-vb-leaderboard__meta">0.263</td><td class="gs-vb-leaderboard__meta">7/200</td><td class="gs-vb-leaderboard__meta">7.0s</td><td class="gs-vb-leaderboard__meta">$3.95</td></tr>
+            <tr><td class="gs-vb-leaderboard__rank">13</td><td><div class="gs-vb-leaderboard__model">Gemini 3.1 Pro</div><div class="gs-vb-leaderboard__org gs-vb-leaderboard__org--google">Google</div></td><td><div class="gs-vb-leaderboard__bar-wrap"><span class="gs-vb-leaderboard__rate">2.5%</span><div class="gs-vb-leaderboard__bar"><div class="gs-vb-leaderboard__bar-fill" style="width:11.1%"></div></div></div></td><td class="gs-vb-leaderboard__meta">0.093</td><td class="gs-vb-leaderboard__meta">5/200</td><td class="gs-vb-leaderboard__meta">44.4s</td><td class="gs-vb-leaderboard__meta">$9.60</td></tr>
+            <tr><td class="gs-vb-leaderboard__rank">14</td><td><div class="gs-vb-leaderboard__model">MiniMax M2.5</div><div class="gs-vb-leaderboard__org gs-vb-leaderboard__org--minimax">MiniMax</div></td><td><div class="gs-vb-leaderboard__bar-wrap"><span class="gs-vb-leaderboard__rate">1.5%</span><div class="gs-vb-leaderboard__bar"><div class="gs-vb-leaderboard__bar-fill" style="width:6.7%"></div></div></div></td><td class="gs-vb-leaderboard__meta">0.181</td><td class="gs-vb-leaderboard__meta">3/200</td><td class="gs-vb-leaderboard__meta">45.0s</td><td class="gs-vb-leaderboard__meta">$3.25</td></tr>
+            <tr><td class="gs-vb-leaderboard__rank">14</td><td><div class="gs-vb-leaderboard__model">MiniMax M2.7</div><div class="gs-vb-leaderboard__org gs-vb-leaderboard__org--minimax">MiniMax</div></td><td><div class="gs-vb-leaderboard__bar-wrap"><span class="gs-vb-leaderboard__rate">1.5%</span><div class="gs-vb-leaderboard__bar"><div class="gs-vb-leaderboard__bar-fill" style="width:6.7%"></div></div></div></td><td class="gs-vb-leaderboard__meta">0.099</td><td class="gs-vb-leaderboard__meta">3/200</td><td class="gs-vb-leaderboard__meta">22.8s</td><td class="gs-vb-leaderboard__meta">$1.74</td></tr>
+            <tr><td class="gs-vb-leaderboard__rank">16</td><td><div class="gs-vb-leaderboard__model">Step 3.5 Flash</div><div class="gs-vb-leaderboard__org gs-vb-leaderboard__org--stepfun">StepFun</div></td><td><div class="gs-vb-leaderboard__bar-wrap"><span class="gs-vb-leaderboard__rate">0.0%</span><div class="gs-vb-leaderboard__bar"><div class="gs-vb-leaderboard__bar-fill" style="width:0%"></div></div></div></td><td class="gs-vb-leaderboard__meta">0.000</td><td class="gs-vb-leaderboard__meta">0/200</td><td class="gs-vb-leaderboard__meta">44.0s</td><td class="gs-vb-leaderboard__meta">$0.00</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tiers -->
+  <section class="gs-vb-tiers">
+    <div class="gs-vb-tiers__inner">
+      <div class="gs-section-eyebrow">Difficulty Tiers</div>
+      <h2 class="gs-section-title">Vulnerability Difficulty Classification</h2>
+      <p class="gs-section-desc">VulnBench-200 instances are classified into three difficulty tiers (67 / 67 / 66 instances).</p>
+      <div class="gs-vb-tiers__grid">
+        <div class="gs-vb-tier"><div class="gs-vb-tier__name">Tier 1 — Pattern</div><p class="gs-vb-tier__desc">XSS (CWE-79), SQL injection (CWE-89), path traversal (CWE-22). Fixes follow well-known patterns: escape output, parameterize queries, sanitize paths.</p></div>
+        <div class="gs-vb-tier"><div class="gs-vb-tier__name">Tier 2 — Logic</div><p class="gs-vb-tier__desc">Authorization (CWE-862/863), CSRF (CWE-352), information disclosure (CWE-200). Requires understanding application logic to add missing checks.</p></div>
+        <div class="gs-vb-tier"><div class="gs-vb-tier__name">Tier 3 — Deep</div><p class="gs-vb-tier__desc">Code injection (CWE-94), resource exhaustion (CWE-400), input validation (CWE-20). Requires deep reasoning about execution flow and system behavior.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Methodology -->
+  <section class="gs-vb-method" id="methodology">
+    <div class="gs-vb-method__inner">
+      <div class="gs-vb-method__grid">
+        <div class="gs-vb-method__left">
+          <div class="gs-section-eyebrow">Methodology</div>
+          <h2 class="gs-section-title">How VulnBench Works</h2>
+          <p class="gs-section-desc">
+            Each model receives the vulnerability description, affected source code, and
+            CWE-specific guidance. An LLM judge (Claude Opus 4.6) scores the candidate patch
+            against the ground-truth fix commit.
+          </p>
+        </div>
+        <div class="gs-vb-method__timeline">
+          <div class="gs-vb-method__line"></div>
+          <div class="gs-vb-method__step"><div class="gs-vb-method__num">1</div><div class="gs-vb-method__step-body"><div class="gs-vb-method__step-title">Collect Real CVEs</div><p class="gs-vb-method__step-desc">10,000+ CVEs from the GitHub Advisory Database, enriched with CVSS scores and CWE IDs from NVD.</p></div></div>
+          <div class="gs-vb-method__step"><div class="gs-vb-method__num">2</div><div class="gs-vb-method__step-body"><div class="gs-vb-method__step-title">Build Instances</div><p class="gs-vb-method__step-desc">Select CVEs with fix commits, download repository snapshots, extract ground-truth diffs, scrub prompt leakage, then quality-score and tier-classify.</p></div></div>
+          <div class="gs-vb-method__step"><div class="gs-vb-method__num">3</div><div class="gs-vb-method__step-body"><div class="gs-vb-method__step-title">Prompt Models</div><p class="gs-vb-method__step-desc">Each model receives CVE description, CWE guidance, affected files, and vulnerable source. Must generate a unified diff patch.</p></div></div>
+          <div class="gs-vb-method__step"><div class="gs-vb-method__num">4</div><div class="gs-vb-method__step-body"><div class="gs-vb-method__step-title">Judge Patches</div><p class="gs-vb-method__step-desc">Claude Opus 4.6 compares candidate against reference: root cause addressed, no new vulnerabilities, correct scope. Score 0.0–1.0.</p></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Dataset -->
+  <section class="gs-vb-dataset" id="dataset">
+    <div class="gs-vb-dataset__inner">
+      <div class="gs-section-eyebrow">Dataset</div>
+      <h2 class="gs-section-title">VulnBench-200 at a Glance</h2>
+      <p class="gs-section-desc">200 curated instances from 200 unique GitHub repositories, balanced across difficulty tiers.</p>
+
+      <div class="gs-vb-dataset__mini-stats">
+        <div class="gs-vb-dataset__mini-stat"><div class="gs-vb-dataset__mini-val">200</div><div class="gs-vb-dataset__mini-label">CVE Instances</div></div>
+        <div class="gs-vb-dataset__mini-stat"><div class="gs-vb-dataset__mini-val">200</div><div class="gs-vb-dataset__mini-label">Unique Repos</div></div>
+        <div class="gs-vb-dataset__mini-stat"><div class="gs-vb-dataset__mini-val">55</div><div class="gs-vb-dataset__mini-label">CWE Types</div></div>
+        <div class="gs-vb-dataset__mini-stat"><div class="gs-vb-dataset__mini-val">7</div><div class="gs-vb-dataset__mini-label">Ecosystems</div></div>
+        <div class="gs-vb-dataset__mini-stat"><div class="gs-vb-dataset__mini-val">36</div><div class="gs-vb-dataset__mini-label">Mean Lines</div></div>
+        <div class="gs-vb-dataset__mini-stat"><div class="gs-vb-dataset__mini-val">1.9</div><div class="gs-vb-dataset__mini-label">Mean Files</div></div>
+      </div>
+
+      <div class="gs-vb-dataset__charts">
+        <div class="gs-vb-chart">
+          <div class="gs-vb-chart__title">Severity Distribution</div>
+          <div class="gs-vb-chart__row"><span class="gs-vb-chart__label" style="width:64px">Critical</span><div class="gs-vb-chart__bar"><div class="gs-vb-chart__bar-fill gs-vb-chart__bar-fill--rose" style="width:10.5%"></div></div><span class="gs-vb-chart__count">21</span></div>
+          <div class="gs-vb-chart__row"><span class="gs-vb-chart__label" style="width:64px">High</span><div class="gs-vb-chart__bar"><div class="gs-vb-chart__bar-fill gs-vb-chart__bar-fill--amber" style="width:21%"></div></div><span class="gs-vb-chart__count">42</span></div>
+          <div class="gs-vb-chart__row"><span class="gs-vb-chart__label" style="width:64px">Medium</span><div class="gs-vb-chart__bar"><div class="gs-vb-chart__bar-fill gs-vb-chart__bar-fill--teal" style="width:68.5%"></div></div><span class="gs-vb-chart__count">137</span></div>
+        </div>
+        <div class="gs-vb-chart">
+          <div class="gs-vb-chart__title">Top CWEs</div>
+          <div class="gs-vb-chart__row"><span class="gs-vb-chart__label" style="width:128px">CWE-79 (XSS)</span><div class="gs-vb-chart__bar"><div class="gs-vb-chart__bar-fill gs-vb-chart__bar-fill--neutral" style="width:100%"></div></div><span class="gs-vb-chart__count">38</span></div>
+          <div class="gs-vb-chart__row"><span class="gs-vb-chart__label" style="width:128px">CWE-22 (Path Trav)</span><div class="gs-vb-chart__bar"><div class="gs-vb-chart__bar-fill gs-vb-chart__bar-fill--neutral" style="width:65.8%"></div></div><span class="gs-vb-chart__count">25</span></div>
+          <div class="gs-vb-chart__row"><span class="gs-vb-chart__label" style="width:128px">CWE-400 (DoS)</span><div class="gs-vb-chart__bar"><div class="gs-vb-chart__bar-fill gs-vb-chart__bar-fill--neutral" style="width:65.8%"></div></div><span class="gs-vb-chart__count">25</span></div>
+          <div class="gs-vb-chart__row"><span class="gs-vb-chart__label" style="width:128px">CWE-20 (Input Val)</span><div class="gs-vb-chart__bar"><div class="gs-vb-chart__bar-fill gs-vb-chart__bar-fill--neutral" style="width:60.5%"></div></div><span class="gs-vb-chart__count">23</span></div>
+          <div class="gs-vb-chart__row"><span class="gs-vb-chart__label" style="width:128px">CWE-94 (Code Inj)</span><div class="gs-vb-chart__bar"><div class="gs-vb-chart__bar-fill gs-vb-chart__bar-fill--neutral" style="width:50%"></div></div><span class="gs-vb-chart__count">19</span></div>
+        </div>
+        <div class="gs-vb-chart">
+          <div class="gs-vb-chart__title">Ecosystems</div>
+          <div class="gs-vb-chart__row"><span class="gs-vb-chart__label" style="width:80px">npm</span><div class="gs-vb-chart__bar"><div class="gs-vb-chart__bar-fill gs-vb-chart__bar-fill--neutral" style="width:100%"></div></div><span class="gs-vb-chart__count">134</span></div>
+          <div class="gs-vb-chart__row"><span class="gs-vb-chart__label" style="width:80px">pip</span><div class="gs-vb-chart__bar"><div class="gs-vb-chart__bar-fill gs-vb-chart__bar-fill--neutral" style="width:40.3%"></div></div><span class="gs-vb-chart__count">54</span></div>
+          <div class="gs-vb-chart__row"><span class="gs-vb-chart__label" style="width:80px">Maven</span><div class="gs-vb-chart__bar"><div class="gs-vb-chart__bar-fill gs-vb-chart__bar-fill--neutral" style="width:3.7%"></div></div><span class="gs-vb-chart__count">5</span></div>
+          <div class="gs-vb-chart__row"><span class="gs-vb-chart__label" style="width:80px">RubyGems</span><div class="gs-vb-chart__bar"><div class="gs-vb-chart__bar-fill gs-vb-chart__bar-fill--neutral" style="width:2.2%"></div></div><span class="gs-vb-chart__count">3</span></div>
+          <div class="gs-vb-chart__row"><span class="gs-vb-chart__label" style="width:80px">Composer</span><div class="gs-vb-chart__bar"><div class="gs-vb-chart__bar-fill gs-vb-chart__bar-fill--neutral" style="width:1.5%"></div></div><span class="gs-vb-chart__count">2</span></div>
+          <div class="gs-vb-chart__row"><span class="gs-vb-chart__label" style="width:80px">Rust</span><div class="gs-vb-chart__bar"><div class="gs-vb-chart__bar-fill gs-vb-chart__bar-fill--neutral" style="width:0.7%"></div></div><span class="gs-vb-chart__count">1</span></div>
+          <div class="gs-vb-chart__row"><span class="gs-vb-chart__label" style="width:80px">Swift</span><div class="gs-vb-chart__bar"><div class="gs-vb-chart__bar-fill gs-vb-chart__bar-fill--neutral" style="width:0.7%"></div></div><span class="gs-vb-chart__count">1</span></div>
+        </div>
+        <div class="gs-vb-chart">
+          <div class="gs-vb-chart__title">CVE Year Range</div>
+          <div class="gs-vb-chart__row"><span class="gs-vb-chart__label" style="width:56px">2026</span><div class="gs-vb-chart__bar"><div class="gs-vb-chart__bar-fill gs-vb-chart__bar-fill--neutral" style="width:29.1%"></div></div><span class="gs-vb-chart__count">16</span></div>
+          <div class="gs-vb-chart__row"><span class="gs-vb-chart__label" style="width:56px">2025</span><div class="gs-vb-chart__bar"><div class="gs-vb-chart__bar-fill gs-vb-chart__bar-fill--neutral" style="width:100%"></div></div><span class="gs-vb-chart__count">55</span></div>
+          <div class="gs-vb-chart__row"><span class="gs-vb-chart__label" style="width:56px">2024</span><div class="gs-vb-chart__bar"><div class="gs-vb-chart__bar-fill gs-vb-chart__bar-fill--neutral" style="width:87.3%"></div></div><span class="gs-vb-chart__count">48</span></div>
+          <div class="gs-vb-chart__row"><span class="gs-vb-chart__label" style="width:56px">2023</span><div class="gs-vb-chart__bar"><div class="gs-vb-chart__bar-fill gs-vb-chart__bar-fill--neutral" style="width:47.3%"></div></div><span class="gs-vb-chart__count">26</span></div>
+          <div class="gs-vb-chart__row"><span class="gs-vb-chart__label" style="width:56px">2022</span><div class="gs-vb-chart__bar"><div class="gs-vb-chart__bar-fill gs-vb-chart__bar-fill--neutral" style="width:43.6%"></div></div><span class="gs-vb-chart__count">24</span></div>
+          <div class="gs-vb-chart__row"><span class="gs-vb-chart__label" style="width:56px">Earlier</span><div class="gs-vb-chart__bar"><div class="gs-vb-chart__bar-fill gs-vb-chart__bar-fill--neutral" style="width:56.4%"></div></div><span class="gs-vb-chart__count">31</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="gs-vb-cta">
+    <div class="gs-vb-cta__shader" id="gs-vb-cta-shader"></div>
+    <div class="gs-vb-cta__inner">
+      <div class="gs-vb-cta__left">
+        <h2 class="gs-vb-cta__title">Run the Benchmark Yourself</h2>
+        <p class="gs-vb-cta__desc">
+          VulnBench is fully open source and reproducible. Evaluate any LLM on the curated
+          200-instance subset with a single command.
+        </p>
+        <div>
+          <a href="https://github.com/" target="_blank" rel="noopener noreferrer" class="gs-vb-cta__btn">
+            View on GitHub <span>&rarr;</span>
+          </a>
+        </div>
+      </div>
+      <div class="gs-vb-cta__right">
+        <pre class="gs-vb-cta__terminal">{`$ vulnbench run \\
+    --model gpt-5.3-codex \\
+    --subset vulnbench-200 \\
+    --runs 3 \\
+    --judge claude-opus-4.6
+
+  [████████████████████░░░░] 164/200
+
+  Model      GPT-5.3 Codex
+  Pass Rate  22.5%
+  Score      0.468
+  Passed     45/200
+  Cost       $8.74
+  Time       43.4s`}</pre>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="gs-vb-footer">
+    <div class="gs-vb-footer__inner">
+      <div class="gs-vb-footer__bar">
+        <div class="gs-vb-footer__links">
+          <span>VulnBench</span>
+          <span class="sep">/</span>
+          <span>Ghost Security</span>
+          <span class="sep">/</span>
+          <span>RSA Conference 2026</span>
+        </div>
+        <div class="gs-vb-footer__note">
+          Built with data from the GitHub Advisory Database and NIST NVD
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    /* ---- WebGL Dithering Shader Helper ---- */
+    function initDitheringShader(container: HTMLElement | null, opts: { shape: number; color: number[]; pxSize?: number; speed?: number; hoverSpeed?: number; resWidth?: number; resHeight?: number }) {
+      if (!container) return;
+      var canvas = document.createElement('canvas');
+      canvas.style.cssText = 'display:block;width:100%;height:100%';
+      container.appendChild(canvas);
+      var gl = canvas.getContext('webgl2');
+      if (!gl) { container.style.display = 'none'; return; }
+
+      var vs = '#version 300 es\nprecision mediump float;\nlayout(location=0) in vec4 a_position;\nvoid main(){gl_Position=a_position;}';
+
+      var fs = '#version 300 es\n' +
+        'precision mediump float;\n' +
+        'uniform float u_time;uniform vec2 u_resolution;uniform vec4 u_colorFront;uniform float u_shape;uniform float u_pxSize;\n' +
+        'out vec4 fragColor;\n' +
+        '#define TWO_PI 6.28318530718\n' +
+        'float hash11(float p){p=fract(p*0.3183099)+0.1;p*=p+19.19;return fract(p*p);}\n' +
+        'vec3 permute(vec3 x){return mod(((x*34.0)+1.0)*x,289.0);}\n' +
+        'float snoise(vec2 v){const vec4 C=vec4(0.211324865405187,0.366025403784439,-0.577350269189626,0.024390243902439);vec2 i=floor(v+dot(v,C.yy));vec2 x0=v-i+dot(i,C.xx);vec2 i1=(x0.x>x0.y)?vec2(1.0,0.0):vec2(0.0,1.0);vec4 x12=x0.xyxy+C.xxzz;x12.xy-=i1;i=mod(i,289.0);vec3 p=permute(permute(i.y+vec3(0.0,i1.y,1.0))+i.x+vec3(0.0,i1.x,1.0));vec3 m=max(0.5-vec3(dot(x0,x0),dot(x12.xy,x12.xy),dot(x12.zw,x12.zw)),0.0);m=m*m;m=m*m;vec3 x2=2.0*fract(p*C.www)-1.0;vec3 h=abs(x2)-0.5;vec3 ox=floor(x2+0.5);vec3 a0=x2-ox;m*=1.79284291400159-0.85373472095314*(a0*a0+h*h);vec3 g;g.x=a0.x*x0.x+h.x*x0.y;g.yz=a0.yz*x12.xz+h.yz*x12.yw;return 130.0*dot(m,g);}\n' +
+        'float getSimplexNoise(vec2 uv,float t){return .5*snoise(uv-vec2(0.,.3*t))+.5*snoise(2.*uv+vec2(0.,.32*t));}\n' +
+        'const int bayer4x4[16]=int[16](0,8,2,10,12,4,14,6,3,11,1,9,15,7,13,5);\n' +
+        'float getBayerValue(vec2 uv){ivec2 pos=ivec2(mod(uv,4.0));return float(bayer4x4[pos.y*4+pos.x])/16.0;}\n' +
+        'void main(){\n' +
+        '  float t=.5*u_time;\n' +
+        '  vec2 uv=gl_FragCoord.xy/u_resolution.xy;uv-=.5;\n' +
+        '  float pxSize=u_pxSize;\n' +
+        '  vec2 pxSizeUv=gl_FragCoord.xy;pxSizeUv-=.5*u_resolution;pxSizeUv/=pxSize;\n' +
+        '  vec2 pixelizedUv=floor(pxSizeUv)*pxSize/u_resolution.xy;pixelizedUv+=.5;pixelizedUv-=.5;\n' +
+        '  vec2 shape_uv=pixelizedUv;\n' +
+        '  float shape=0.0;\n' +
+        '  if(u_shape<1.5){\n' +
+        '    vec2 simplex_uv=pxSizeUv*.001;\n' +
+        '    shape=0.5+0.5*getSimplexNoise(simplex_uv,t);shape=smoothstep(0.3,0.9,shape);\n' +
+        '  }else if(u_shape<2.5){\n' +
+        '    vec2 warp_uv=pxSizeUv*.006;\n' +
+        '    for(float i=1.0;i<8.0;i++){warp_uv.x+=0.3/i*sin(i*2.3*warp_uv.y+t*0.6+i*0.7);warp_uv.y+=0.3/i*cos(i*1.9*warp_uv.x+t*0.4+i*0.5);}\n' +
+        '    float v1=sin(warp_uv.x*3.0+warp_uv.y*2.5+t*0.8);float v2=cos(warp_uv.y*3.5-warp_uv.x*2.0-t*0.5);float v3=sin(warp_uv.x*1.5-warp_uv.y*2.8+t*0.3);\n' +
+        '    shape=0.5+0.5*sin(v1*2.0+v2*2.0+v3*1.5);shape=pow(shape,1.8);\n' +
+        '  }else if(u_shape<3.5){\n' +
+        '    shape_uv*=.05;\n' +
+        '    float stripeIdx=floor(2.*shape_uv.x/TWO_PI);float rand=hash11(stripeIdx*10.);\n' +
+        '    rand=sign(rand-.5)*pow(.1+abs(rand),.4);\n' +
+        '    shape=sin(shape_uv.x)*cos(shape_uv.y-5.*rand*t);shape=pow(abs(shape),6.);\n' +
+        '  }else if(u_shape<4.5){\n' +
+        '    shape_uv*=4.;\n' +
+        '    float wave=cos(.5*shape_uv.x-2.*t)*sin(1.5*shape_uv.x+t)*(.75+.25*cos(3.*t));\n' +
+        '    shape=1.-smoothstep(-1.,1.,shape_uv.y+wave);\n' +
+        '  }else if(u_shape<5.5){\n' +
+        '    float dist=length(shape_uv);float waves=sin(pow(dist,1.7)*7.-3.*t)*.5+.5;shape=waves;\n' +
+        '  }else if(u_shape<6.5){\n' +
+        '    float l=length(shape_uv);float angle=6.*atan(shape_uv.y,shape_uv.x)+4.*t;\n' +
+        '    float twist=1.2;float offset=pow(l,-twist)+angle/TWO_PI;\n' +
+        '    float mid=smoothstep(0.,1.,pow(l,twist));shape=mix(0.,fract(offset),mid);\n' +
+        '  }\n' +
+        '  float dithering=getBayerValue(pxSizeUv);dithering-=.5;float res=step(.5,shape+dithering);\n' +
+        '  vec3 fg=u_colorFront.rgb*u_colorFront.a;fragColor=vec4(fg*res,u_colorFront.a*res);\n' +
+        '}';
+
+      function compile(type: number, src: string) {
+        var s = gl.createShader(type)!; gl.shaderSource(s, src); gl.compileShader(s);
+        return gl.getShaderParameter(s, gl.COMPILE_STATUS) ? s : null;
+      }
+      var vShader = compile(gl.VERTEX_SHADER, vs);
+      var fShader = compile(gl.FRAGMENT_SHADER, fs);
+      if (!vShader || !fShader) { container.style.display = 'none'; return; }
+
+      var program = gl.createProgram()!;
+      gl.attachShader(program, vShader); gl.attachShader(program, fShader);
+      gl.linkProgram(program);
+      if (!gl.getProgramParameter(program, gl.LINK_STATUS)) { container.style.display = 'none'; return; }
+
+      var buf = gl.createBuffer();
+      gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+      gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1,1,-1,-1,1,-1,1,1,-1,1,1]), gl.STATIC_DRAW);
+      var posAttr = gl.getAttribLocation(program, 'a_position');
+      gl.enableVertexAttribArray(posAttr);
+      gl.vertexAttribPointer(posAttr, 2, gl.FLOAT, false, 0, 0);
+
+      var uTime = gl.getUniformLocation(program, 'u_time');
+      var uRes = gl.getUniformLocation(program, 'u_resolution');
+      var uColor = gl.getUniformLocation(program, 'u_colorFront');
+      var uShape = gl.getUniformLocation(program, 'u_shape');
+      var uPxSize = gl.getUniformLocation(program, 'u_pxSize');
+      var accTime = 0, lastFrame = Date.now();
+      var speed = opts.speed || 1;
+      var targetSpeed = speed;
+
+      if (opts.hoverSpeed) {
+        container.parentElement?.addEventListener('mouseenter', function() { targetSpeed = opts.hoverSpeed!; });
+        container.parentElement?.addEventListener('mouseleave', function() { targetSpeed = opts.speed || 1; });
+      }
+
+      function resize() {
+        if (opts.resWidth && opts.resHeight) {
+          canvas.width = opts.resWidth; canvas.height = opts.resHeight;
+        } else {
+          var r = container.getBoundingClientRect();
+          var dpr = Math.min(window.devicePixelRatio || 1, 2);
+          canvas.width = r.width * dpr; canvas.height = r.height * dpr;
+        }
+        gl.viewport(0, 0, canvas.width, canvas.height);
+      }
+      resize();
+      window.addEventListener('resize', resize);
+
+      (function render() {
+        var now = Date.now();
+        var delta = (now - lastFrame) * 0.001;
+        lastFrame = now;
+        speed += (targetSpeed - speed) * 0.05;
+        accTime += delta * speed;
+        gl.clear(gl.COLOR_BUFFER_BIT);
+        gl.useProgram(program);
+        gl.uniform1f(uTime, accTime);
+        gl.uniform2f(uRes, canvas.width, canvas.height);
+        gl.uniform4fv(uColor, opts.color);
+        gl.uniform1f(uShape, opts.shape);
+        gl.uniform1f(uPxSize, opts.pxSize || 4.0);
+        gl.drawArrays(gl.TRIANGLES, 0, 6);
+        requestAnimationFrame(render);
+      })();
+    }
+
+    /* ---- Nav mobile toggle ---- */
+    (function() {
+      var toggle = document.getElementById('gs-nav-toggle');
+      var mobile = document.getElementById('gs-nav-mobile');
+      if (toggle && mobile) {
+        toggle.addEventListener('click', function() { mobile.classList.toggle('gs-open'); });
+        mobile.querySelectorAll('a').forEach(function(a) {
+          a.addEventListener('click', function() { mobile.classList.remove('gs-open'); });
+        });
+      }
+    })();
+
+    /* ---- Hero warp shader ---- */
+    initDitheringShader(document.getElementById('gs-vb-hero-shader'), {
+      shape: 2, color: [1, 1, 1, 1], pxSize: 4, speed: 1
+    });
+
+    /* ---- CTA swirl shader ---- */
+    initDitheringShader(document.getElementById('gs-vb-cta-shader'), {
+      shape: 6, color: [1, 1, 1, 1], pxSize: 4, speed: 0.15
+    });
+  </script>
+</Layout>
